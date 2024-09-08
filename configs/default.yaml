@@ -1,0 +1,34 @@
+arxiv:
+  category: "physics.plasm-ph"
+  max_results: 1000
+  batch_size: 100
+  delay_seconds: 3
+  base_url: "http://export.arxiv.org/api/query"
+  date_from: "20180101"  # Get older papers with citations
+  date_to: "20231231"    # Papers up to end of 2023
+
+embedding:
+  model_name: "all-MiniLM-L6-v2"
+  batch_size: 64
+  max_seq_length: 512
+  device: "cpu"  # or "cuda" if GPU available
+
+search:
+  index_type: "flat"  # "flat" for exact, "ivf" for approximate
+  nlist: 100  # number of clusters for IVF
+  nprobe: 10  # clusters to search for IVF
+  top_k: 20
+
+visualization:
+  umap_neighbors: 15
+  umap_min_dist: 0.1
+  umap_metric: "cosine"
+  n_components: 2
+  random_state: 42
+
+paths:
+  data_dir: "results/data"
+  index_dir: "results/index"
+  plots_dir: "results/plots"
+  embeddings_file: "results/embeddings.npy"
+  metadata_file: "results/metadata.parquet"
