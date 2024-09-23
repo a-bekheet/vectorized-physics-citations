@@ -1,0 +1,271 @@
+{
+  "embedding_stats": {
+    "n_embeddings": 1000,
+    "embedding_dim": 384,
+    "mean_norm": 1.0,
+    "std_norm": 4.979753143175003e-08,
+    "mean_pairwise_similarity": 0.2877735495567322,
+    "std_pairwise_similarity": 0.1318233609199524,
+    "min_pairwise_similarity": -0.2201739251613617,
+    "max_pairwise_similarity": 0.9482851624488831
+  },
+  "silhouette_score": 0.06807876378297806,
+  "search_metrics": {
+    "mean_latency_ms": 0.053942203521728516,
+    "p50_latency_ms": 0.03814697265625,
+    "p95_latency_ms": 0.053942203521728516,
+    "p99_latency_ms": 0.28463363647461426,
+    "mean_category_overlap": 0.6227119047619047,
+    "std_category_overlap": 0.2025309609180421
+  },
+  "cluster_stats": {
+    "cluster_0": {
+      "size": 81,
+      "percentage": 8.1,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          81
+        ],
+        [
+          "physics.comp-ph",
+          28
+        ],
+        [
+          "cs.LG",
+          20
+        ],
+        [
+          "math.NA",
+          9
+        ],
+        [
+          "physics.space-ph",
+          7
+        ]
+      ],
+      "sample_titles": [
+        "Autoregressive Transformers for Disruption Prediction in Nuclear Fusion Plasmas",
+        "Virialized equation of state for warm and dense stellar plasmas in proto-neutron stars and Supernova matter",
+        "Machine Learning Based Compton Suppression for Nuclear Fusion Plasma Diagnostics"
+      ]
+    },
+    "cluster_1": {
+      "size": 140,
+      "percentage": 14.000000000000002,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          140
+        ],
+        [
+          "physics.app-ph",
+          12
+        ],
+        [
+          "physics.atom-ph",
+          9
+        ],
+        [
+          "physics.acc-ph",
+          7
+        ],
+        [
+          "cond-mat.mtrl-sci",
+          6
+        ]
+      ],
+      "sample_titles": [
+        "Presheath-like structures and effusive particle losses for biased probes at and near I-V electron saturation",
+        "Efficiency of plasmochemical production of hydrogen from propane under the influence of laser radiation",
+        "Effect of detachment on Magnum-PSI ELM-like pulses: II. Spectroscopic analysis and role of molecular assisted reactions"
+      ]
+    },
+    "cluster_2": {
+      "size": 112,
+      "percentage": 11.200000000000001,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          112
+        ],
+        [
+          "physics.app-ph",
+          8
+        ],
+        [
+          "physics.comp-ph",
+          8
+        ],
+        [
+          "nlin.CD",
+          5
+        ],
+        [
+          "physics.acc-ph",
+          3
+        ]
+      ],
+      "sample_titles": [
+        "Sheath Analysis of Conducting Channel Walls in Anode-Layer Hall Thruster with Acceleration Zone Shifted Downstream",
+        "Intrinsic toroidal rotation driven by turbulent and neoclassical processes in tokamak plasmas from global gyrokinetic simulations",
+        "A semi-analytical model of RF condensation that can handle localized power depositions"
+      ]
+    },
+    "cluster_3": {
+      "size": 145,
+      "percentage": 14.499999999999998,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          145
+        ],
+        [
+          "astro-ph.HE",
+          45
+        ],
+        [
+          "astro-ph.SR",
+          37
+        ],
+        [
+          "physics.space-ph",
+          32
+        ],
+        [
+          "physics.flu-dyn",
+          27
+        ]
+      ],
+      "sample_titles": [
+        "Global gyrokinetic simulation of magnetic island induced ion temperature gradient turbulence in toroidal plasma",
+        "A Method for Determining the Locations and Configurations of Magnetic Reconnection within 3D Turbulent Plasmas",
+        "On the Cascade-Dissipation Balance in Astrophysical Plasmas"
+      ]
+    },
+    "cluster_4": {
+      "size": 143,
+      "percentage": 14.299999999999999,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          143
+        ],
+        [
+          "physics.space-ph",
+          20
+        ],
+        [
+          "astro-ph.HE",
+          19
+        ],
+        [
+          "physics.comp-ph",
+          13
+        ],
+        [
+          "astro-ph.SR",
+          8
+        ]
+      ],
+      "sample_titles": [
+        "PIC-JR$_{ho}$m: a pseudo-spectral Particle-In-Cell formulation with arbitrary charge and current densities time dependencies for the modeling of relativistic plasmas",
+        "Ion Reflection by a Rippled Perpendicular Shock",
+        "Tearing-mediated reconnection in magnetohydrodynamic poorly ionized plasmas. I. Onset and linear evolution"
+      ]
+    },
+    "cluster_5": {
+      "size": 88,
+      "percentage": 8.799999999999999,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          88
+        ],
+        [
+          "physics.comp-ph",
+          14
+        ],
+        [
+          "quant-ph",
+          12
+        ],
+        [
+          "physics.atom-ph",
+          8
+        ],
+        [
+          "math-ph",
+          8
+        ]
+      ],
+      "sample_titles": [
+        "Particle propagation and electron transport in gases",
+        "Novel Instabilities in Counter-Streaming Nonabelian Fluids",
+        "Two-Time Quantum Fluctuations Approach and its Relation to the Bethe--Salpeter Equation"
+      ]
+    },
+    "cluster_6": {
+      "size": 121,
+      "percentage": 12.1,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          121
+        ],
+        [
+          "physics.space-ph",
+          87
+        ],
+        [
+          "astro-ph.SR",
+          80
+        ],
+        [
+          "astro-ph.HE",
+          37
+        ],
+        [
+          "astro-ph.IM",
+          15
+        ]
+      ],
+      "sample_titles": [
+        "Liquid-phase epitaxy of neutron star crusts and white dwarf cores",
+        "Influence of Ionization on the Polytropic Index of the Solar Atmosphere within Local Thermodynamic Equilibrium Approximation",
+        "Particle acceleration by sub-proton cyclotron frequency spectrum of dispersive Alfven waves in inhomogeneous solar coronal plasmas"
+      ]
+    },
+    "cluster_7": {
+      "size": 170,
+      "percentage": 17.0,
+      "top_categories": [
+        [
+          "physics.plasm-ph",
+          170
+        ],
+        [
+          "physics.acc-ph",
+          55
+        ],
+        [
+          "physics.optics",
+          34
+        ],
+        [
+          "hep-ph",
+          9
+        ],
+        [
+          "physics.app-ph",
+          9
+        ]
+      ],
+      "sample_titles": [
+        "Monitoring of nanoplasmonics-assisted deuterium production in a polymer seeded with resonant Au nanorods using in situ femtosecond laser induced breakdown spectroscopy",
+        "Particle-In-Cell Code Comparison for Ion Acceleration: EPOCH and Smilei",
+        "Response of negative ion beamlet to RF field in beam extraction region"
+      ]
+    }
+  }
+}

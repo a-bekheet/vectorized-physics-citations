@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Semantic search and visualization system for Plasma Physics papers from ArXiv using vector embeddings and UMAP projections." />
+  <link rel="canonical" href="https://a-bekheet.github.io/projects/vectorized-physics-citations.html" />
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Vectorized Physics Citations - Ali Bekheet" />
+  <meta property="og:description" content="Semantic search and visualization system for Plasma Physics papers from ArXiv using vector embeddings and UMAP projections." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://a-bekheet.github.io/projects/vectorized-physics-citations.html" />
+  <meta property="og:site_name" content="Ali Bekheet" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Vectorized Physics Citations - Ali Bekheet" />
+  <meta name="twitter:description" content="Semantic search and visualization system for Plasma Physics papers from ArXiv using vector embeddings and UMAP projections." />
+
+  <title>Vectorized Physics Citations - Ali Bekheet</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <!-- Resource hints for faster loading -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="../css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h1>Ali Bekheet</h1>
+      <p>Engineering Physics & Computing</p>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../volunteering.html">Volunteering</a></li>
+        <li><a href="../work-experience.html">Work Experience</a></li>
+        <li><a href="../skills.html">Skills</a></li>
+        <li><a href="../library.html">Library</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="theme-toggle-button" type="button" class="themed-button" style="width: 100%; margin-bottom: 1rem;">
+        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+        <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
+        <span id="theme-toggle-text">Toggle Theme</span>
+      </button>
+
+      <div class="social-links">
+        <a href="https://linkedin.com/in/awbekheet" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/a-bekheet" target="_blank" rel="noopener noreferrer" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:alibekheet@outlook.com" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <a href="../projects.html" style="display: inline-flex; align-items: center; margin-bottom: 2rem;">
+      <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i> Back to Projects
+    </a>
+
+    <!-- Hero Image -->
+    <div class="card-background" style="margin-bottom: 2rem; padding: 1rem; display: flex; justify-content: center;">
+      <img src="../images/paper_clusters.png" alt="Vectorized Physics Citations - Cluster Visualization" style="max-width: 100%; height: auto;">
+    </div>
+
+    <!-- Project Header -->
+    <div class="card-background" style="padding: 2rem; margin-bottom: 2rem;">
+      <h1>Vectorized Physics Citations</h1>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.5rem; color: var(--color-accent);">
+        <span style="display: flex; align-items: center;"><i class="fas fa-calendar" style="margin-right: 0.5rem;"></i>Completed: November 2024</span>
+        <span style="display: flex; align-items: center;"><i class="fas fa-code" style="margin-right: 0.5rem;"></i>NLP & Scientific Computing</span>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
+        <span class="tag">Python</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Sentence-BERT</span>
+        <span class="tag">FAISS</span>
+        <span class="tag">UMAP</span>
+        <span class="tag">ArXiv API</span>
+        <span class="tag">Semantic Search</span>
+      </div>
+
+      <!-- Key Metrics -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div class="card-background" style="padding: 1.5rem;">
+          <div style="font-size: 1.5rem; font-weight: bold;">10,000+</div>
+          <div style="color: var(--color-accent);">Papers Indexed</div>
+        </div>
+        <div class="card-background" style="padding: 1.5rem;">
+          <div style="font-size: 1.5rem; font-weight: bold;">&lt;100ms</div>
+          <div style="color: var(--color-accent);">Query Latency</div>
+        </div>
+        <div class="card-background" style="padding: 1.5rem;">
+          <div style="font-size: 1.5rem; font-weight: bold;">384-dim</div>
+          <div style="color: var(--color-accent);">Embedding Space</div>
+        </div>
+      </div>
+
+      <h2>Project Overview</h2>
+      <p style="margin-bottom: 1.5rem;">
+        This project implements a semantic search and visualization system for Plasma Physics papers from ArXiv.
+        Unlike traditional keyword-based search, this system uses dense vector embeddings from Sentence-BERT to
+        find conceptually similar papers based on meaning. The system processes paper abstracts, generates
+        384-dimensional embeddings, and enables fast similarity search using FAISS indexing. Interactive
+        visualizations created with UMAP reveal the structure of the research landscape, showing how different
+        plasma physics topics cluster together in the embedding space.
+      </p>
+
+      <h2>Key Challenges</h2>
+      <ul style="margin-left: 1.5rem; list-style-type: disc; margin-bottom: 1.5rem;">
+        <li style="margin-bottom: 0.5rem;">Processing LaTeX-heavy academic text while preserving semantic meaning</li>
+        <li style="margin-bottom: 0.5rem;">Scaling embedding generation and search to 10,000+ papers efficiently</li>
+        <li style="margin-bottom: 0.5rem;">Creating meaningful 2D projections that reveal research cluster structure</li>
+      </ul>
+    </div>
+
+    <!-- Technical Implementation -->
+    <div class="card-background" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2>Technical Implementation</h2>
+      <p style="margin-bottom: 1.5rem;">
+        The pipeline consists of four main stages: data collection from the ArXiv API, text preprocessing to
+        handle LaTeX and special characters, embedding generation using the all-MiniLM-L6-v2 model, and
+        index building with FAISS for sub-millisecond similarity search. The UMAP algorithm projects the
+        high-dimensional embedding space into 2D for visualization while preserving both local and global
+        structure.
+      </p>
+
+      <!-- Code Snippet -->
+      <div class="card-background" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+        <pre style="white-space: pre-wrap; font-size: 0.9rem; overflow-x: auto;"><code># Semantic search with vector embeddings
+query_embedding = embedder.embed_single("tokamak plasma instabilities")
+indices, scores = search_index.search(query_embedding, top_k=10)
+
+# Results are ranked by cosine similarity
+for idx, score in zip(indices, scores):
+    paper = metadata.iloc[idx]
+    print(f"{score:.3f} | {paper['title'][:60]}...")</code></pre>
+      </div>
+
+      <h3>Model Architecture</h3>
+      <p style="margin-bottom: 1.5rem;">
+        The embedding model (all-MiniLM-L6-v2) is a distilled version of BERT optimized for semantic similarity
+        tasks. It processes the concatenated title and abstract of each paper, producing a normalized 384-dimensional
+        vector. These vectors are indexed using FAISS's IndexFlatIP for exact inner-product (cosine) similarity
+        search, enabling query times under 1ms even for 10,000+ documents.
+      </p>
+    </div>
+
+    <!-- Image Gallery -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+      <div class="card-background" style="padding: 1rem; display: flex; justify-content: center;">
+        <img src="../images/embedding_space.png" alt="UMAP embedding space visualization showing paper distribution" style="max-width: 100%; height: auto;">
+      </div>
+      <div class="card-background" style="padding: 1rem; display: flex; justify-content: center;">
+        <img src="../images/similarity_distribution.png" alt="Distribution of pairwise cosine similarities" style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+
+    <!-- Results and Impact -->
+    <div class="card-background" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2>Results and Impact</h2>
+      <p style="margin-bottom: 1.5rem;">
+        The system successfully indexes over 10,000 Plasma Physics papers with embedding generation at 87 papers/second
+        on CPU. Search queries return results in under 1ms with meaningful semantic similarity—papers about similar
+        topics consistently appear together in search results, even when they share no common keywords.
+      </p>
+      <p style="margin-bottom: 1.5rem;">
+        The UMAP visualizations reveal clear clustering of research topics: papers on tokamak physics, laser-plasma
+        interactions, and space plasma phenomena form distinct regions in the 2D projection. The average category
+        overlap between query papers and their nearest neighbors is 58.9%, indicating strong semantic coherence.
+      </p>
+      <p>
+        The interactive HTML visualization enables researchers to explore the paper landscape, zoom into clusters
+        of interest, and discover related work they might have missed through traditional keyword search.
+      </p>
+    </div>
+
+    <!-- Technical Overview -->
+    <div class="card-background" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2>Technical Overview</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 1.5rem;">
+        <div>
+          <h3>Data Pipeline</h3>
+          <p>Fetches paper metadata from ArXiv's OAI-PMH API with rate limiting and caching. Text preprocessing removes LaTeX formatting while preserving semantic content.</p>
+          <h4 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.75rem;">Key Components:</h4>
+          <ul style="margin-left: 1.5rem; list-style-type: disc;">
+            <li>ArXiv API client with exponential backoff</li>
+            <li>LaTeX-aware text preprocessing</li>
+            <li>Parquet storage for efficient I/O</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Search System</h3>
+          <p>FAISS index enables exact nearest-neighbor search in sub-millisecond time. Normalized embeddings allow cosine similarity via inner product.</p>
+          <h4 style="font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.75rem;">Key Features:</h4>
+          <ul style="margin-left: 1.5rem; list-style-type: disc;">
+            <li>Sentence-BERT embeddings (384-dim)</li>
+            <li>FAISS IndexFlatIP for exact search</li>
+            <li>CLI tool for interactive exploration</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future Development -->
+    <div class="card-background" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2>Future Development</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
+        <div class="card-background" style="padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem;">Expanded Coverage</h3>
+          <ul style="margin-left: 1.5rem; list-style-type: disc; margin-top: 1rem;">
+            <li>Index all physics categories</li>
+            <li>Add citation graph integration</li>
+          </ul>
+        </div>
+        <div class="card-background" style="padding: 1.5rem;">
+          <h3 style="font-size: 1.1rem;">Enhanced Features</h3>
+          <ul style="margin-left: 1.5rem; list-style-type: disc; margin-top: 1rem;">
+            <li>Web interface with Flask/FastAPI</li>
+            <li>Author similarity networks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GitHub Link -->
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+      <a href="https://github.com/a-bekheet/vectorized-physics-citations" class="themed-button" style="display: inline-flex; align-items: center;">
+        <i class="fab fa-github" style="margin-right: 0.5rem;"></i> View on GitHub
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="main-content">
+      <p style="color: var(--color-muted); font-size: 0.9rem;">
+        &copy; <span id="copyright-year"></span> Ali Bekheet
+      </p>
+    </div>
+  </footer>
+
+  <script src="../js/projects.js"></script>
+  <script src="../js/main.js"></script>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    if (mobileMenuBtn && sidebar) {
+      mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 &&
+            !sidebar.contains(e.target) &&
+            !mobileMenuBtn.contains(e.target) &&
+            sidebar.classList.contains('open')) {
+          sidebar.classList.remove('open');
+        }
+      });
+    }
+  </script>
+
+  <!-- HTML Prefetch on Hover System -->
+  <script src="../js/prefetch.js"></script>
+
+</body>
+</html>
