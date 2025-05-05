@@ -1,0 +1,50 @@
+@PACKAGE_INIT@
+
+# =============================================================================
+# CppEmbedderConfig.cmake
+# =============================================================================
+#
+# This file is used by find_package(CppEmbedder) to locate the cpp_embedder
+# library and its dependencies.
+#
+# Usage:
+#   find_package(CppEmbedder REQUIRED)
+#   target_link_libraries(my_target CppEmbedder::cpp_embedder)
+#
+# Or for the shared library:
+#   target_link_libraries(my_target CppEmbedder::cpp_embedder_shared)
+#
+# Imported Targets:
+#   CppEmbedder::cpp_embedder        - Static library
+#   CppEmbedder::cpp_embedder_shared - Shared library (if built)
+#
+# Variables:
+#   CppEmbedder_FOUND          - True if library was found
+#   CppEmbedder_VERSION        - Library version
+#   CppEmbedder_INCLUDE_DIRS   - Include directories
+#   CppEmbedder_LIBRARIES      - Libraries to link
+#
+
+include(CMakeFindDependencyMacro)
+
+# Import the targets
+include("${CMAKE_CURRENT_LIST_DIR}/CppEmbedderTargets.cmake")
+
+# Set convenience variables
+set(CppEmbedder_INCLUDE_DIRS "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+
+if(TARGET CppEmbedder::cpp_embedder)
+    set(CppEmbedder_LIBRARIES CppEmbedder::cpp_embedder)
+endif()
+
+if(TARGET CppEmbedder::cpp_embedder_shared)
+    set(CppEmbedder_SHARED_LIBRARIES CppEmbedder::cpp_embedder_shared)
+endif()
+
+check_required_components(CppEmbedder)
+
+# Print configuration message
+if(NOT CppEmbedder_FIND_QUIETLY)
+    message(STATUS "Found CppEmbedder: ${CMAKE_CURRENT_LIST_DIR}")
+    message(STATUS "  Version: @PROJECT_VERSION@")
+endif()
