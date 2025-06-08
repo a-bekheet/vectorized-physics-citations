@@ -1,0 +1,487 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cpp_embedder/weight_format.schema.json",
+  "title": "cpp_embedder Weight File Format",
+  "description": "JSON Schema describing the logical structure of the binary weight file format for cpp_embedder",
+  "type": "object",
+  "required": [
+    "header",
+    "metadata",
+    "vocabulary",
+    "tensor_index",
+    "footer"
+  ],
+  "properties": {
+    "header": {
+      "type": "object",
+      "description": "64-byte file header",
+      "required": [
+        "magic",
+        "version_major",
+        "version_minor",
+        "flags",
+        "metadata_offset",
+        "metadata_size",
+        "vocab_offset",
+        "vocab_size",
+        "tensor_index_offset",
+        "tensor_index_count",
+        "tensor_data_offset",
+        "tensor_data_size",
+        "total_file_size",
+        "header_checksum"
+      ],
+      "properties": {
+        "magic": {
+          "type": "string",
+          "const": "EMBD",
+          "description": "Magic bytes identifying file format (0x45 0x4D 0x42 0x44)"
+        },
+        "version_major": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Format major version (uint16)"
+        },
+        "version_minor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "Format minor version (uint16)"
+        },
+        "flags": {
+          "type": "object",
+          "description": "Feature flags (uint32 bit field)",
+          "properties": {
+            "vocab_embedded": {
+              "type": "boolean",
+              "description": "Bit 0: Vocabulary is embedded in file"
+            },
+            "tensors_aligned": {
+              "type": "boolean",
+              "description": "Bit 1: Tensor data is 64-byte aligned"
+            },
+            "checksum_enabled": {
+              "type": "boolean",
+              "description": "Bit 2: File includes checksums"
+            },
+            "compressed": {
+              "type": "boolean",
+              "description": "Bit 3: Tensor data is compressed (reserved)"
+            }
+          }
+        },
+        "metadata_offset": {
+          "type": "integer",
+          "minimum": 64,
+          "description": "Byte offset to metadata section (uint32)"
+        },
+        "metadata_size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Size of metadata section in bytes (uint32)"
+        },
+        "vocab_offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Byte offset to vocabulary section (uint32)"
+        },
+        "vocab_size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Size of vocabulary section in bytes (uint32)"
+        },
+        "tensor_index_offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Byte offset to tensor index (uint32)"
+        },
+        "tensor_index_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of tensors in index (uint32)"
+        },
+        "tensor_data_offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Byte offset to tensor data (uint32)"
+        },
+        "tensor_data_size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total size of tensor data in bytes (uint64)"
+        },
+        "total_file_size": {
+          "type": "integer",
+          "minimum": 80,
+          "description": "Total file size for validation (uint64)"
+        },
+        "header_checksum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "CRC32 checksum of header bytes 0-55 (uint32)"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Model metadata key-value pairs",
+      "required": [
+        "model_name",
+        "model_version",
+        "embedding_dim",
+        "vocab_size",
+        "num_layers",
+        "num_attention_heads",
+        "hidden_size",
+        "intermediate_size",
+        "max_position_emb"
+      ],
+      "properties": {
+        "model_name": {
+          "type": "string",
+          "description": "Model identifier (e.g., 'all-MiniLM-L6-v2')"
+        },
+        "model_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Model version in semver format"
+        },
+        "embedding_dim": {
+          "type": "integer",
+          "const": 384,
+          "description": "Output embedding dimension"
+        },
+        "vocab_size": {
+          "type": "integer",
+          "const": 30522,
+          "description": "Vocabulary size"
+        },
+        "num_layers": {
+          "type": "integer",
+          "const": 6,
+          "description": "Number of transformer layers"
+        },
+        "num_attention_heads": {
+          "type": "integer",
+          "const": 12,
+          "description": "Number of attention heads per layer"
+        },
+        "hidden_size": {
+          "type": "integer",
+          "const": 384,
+          "description": "Hidden dimension size"
+        },
+        "intermediate_size": {
+          "type": "integer",
+          "const": 1536,
+          "description": "FFN intermediate dimension"
+        },
+        "max_position_emb": {
+          "type": "integer",
+          "const": 512,
+          "description": "Maximum position embeddings"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp in ISO 8601 format"
+        },
+        "source_model": {
+          "type": "string",
+          "description": "Original model source (e.g., HuggingFace URL)"
+        }
+      },
+      "additionalProperties": {
+        "type": "string",
+        "description": "Additional custom metadata keys"
+      }
+    },
+    "vocabulary": {
+      "type": "object",
+      "description": "WordPiece vocabulary data",
+      "required": [
+        "token_count",
+        "special_tokens",
+        "tokens"
+      ],
+      "properties": {
+        "token_count": {
+          "type": "integer",
+          "const": 30522,
+          "description": "Number of tokens in vocabulary"
+        },
+        "special_tokens": {
+          "type": "object",
+          "description": "Special token ID mappings",
+          "required": [
+            "pad_id",
+            "unk_id",
+            "cls_id",
+            "sep_id",
+            "mask_id"
+          ],
+          "properties": {
+            "pad_id": {
+              "type": "integer",
+              "const": 0,
+              "description": "[PAD] token ID"
+            },
+            "unk_id": {
+              "type": "integer",
+              "const": 100,
+              "description": "[UNK] token ID"
+            },
+            "cls_id": {
+              "type": "integer",
+              "const": 101,
+              "description": "[CLS] token ID"
+            },
+            "sep_id": {
+              "type": "integer",
+              "const": 102,
+              "description": "[SEP] token ID"
+            },
+            "mask_id": {
+              "type": "integer",
+              "const": 103,
+              "description": "[MASK] token ID"
+            }
+          }
+        },
+        "tokens": {
+          "type": "array",
+          "description": "Array of token strings indexed by token ID",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 30522,
+          "maxItems": 30522
+        }
+      }
+    },
+    "tensor_index": {
+      "type": "array",
+      "description": "Index of all tensors in the weight file",
+      "items": {
+        "$ref": "#/$defs/tensor_descriptor"
+      },
+      "minItems": 1
+    },
+    "footer": {
+      "type": "object",
+      "description": "16-byte file footer",
+      "required": [
+        "data_checksum",
+        "file_checksum",
+        "magic_end"
+      ],
+      "properties": {
+        "data_checksum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "CRC32 of tensor data section (uint32)"
+        },
+        "file_checksum": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "CRC32 of all bytes before footer (uint32)"
+        },
+        "magic_end": {
+          "type": "string",
+          "const": "DBME",
+          "description": "End magic bytes (0x44 0x42 0x4D 0x45)"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "tensor_descriptor": {
+      "type": "object",
+      "description": "Descriptor for a single tensor",
+      "required": [
+        "name",
+        "dtype",
+        "shape",
+        "data_offset"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tensor name following PyTorch naming convention"
+        },
+        "name_hash": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "FNV-1a hash of tensor name (uint32)"
+        },
+        "dtype": {
+          "type": "string",
+          "enum": [
+            "float32",
+            "float16",
+            "bfloat16",
+            "int32",
+            "int16",
+            "int8",
+            "uint32",
+            "uint16",
+            "uint8"
+          ],
+          "description": "Data type of tensor elements"
+        },
+        "dtype_code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8,
+          "description": "Numeric code for dtype (0=float32, 1=float16, etc.)"
+        },
+        "shape": {
+          "type": "array",
+          "description": "Tensor dimensions (1-4 elements)",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 1,
+          "maxItems": 4
+        },
+        "data_offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Byte offset from tensor_data_offset (uint64)"
+        },
+        "data_size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Size of tensor data in bytes"
+        }
+      }
+    },
+    "dtype_sizes": {
+      "type": "object",
+      "description": "Byte sizes for each data type",
+      "properties": {
+        "float32": { "const": 4 },
+        "float16": { "const": 2 },
+        "bfloat16": { "const": 2 },
+        "int32": { "const": 4 },
+        "int16": { "const": 2 },
+        "int8": { "const": 1 },
+        "uint32": { "const": 4 },
+        "uint16": { "const": 2 },
+        "uint8": { "const": 1 }
+      }
+    }
+  },
+  "examples": [
+    {
+      "header": {
+        "magic": "EMBD",
+        "version_major": 1,
+        "version_minor": 0,
+        "flags": {
+          "vocab_embedded": true,
+          "tensors_aligned": true,
+          "checksum_enabled": true,
+          "compressed": false
+        },
+        "metadata_offset": 64,
+        "metadata_size": 512,
+        "vocab_offset": 576,
+        "vocab_size": 307200,
+        "tensor_index_offset": 307776,
+        "tensor_index_count": 101,
+        "tensor_data_offset": 311008,
+        "tensor_data_size": 90567680,
+        "total_file_size": 90878704,
+        "header_checksum": 2891234567
+      },
+      "metadata": {
+        "model_name": "all-MiniLM-L6-v2",
+        "model_version": "1.0.0",
+        "embedding_dim": 384,
+        "vocab_size": 30522,
+        "num_layers": 6,
+        "num_attention_heads": 12,
+        "hidden_size": 384,
+        "intermediate_size": 1536,
+        "max_position_emb": 512,
+        "created_at": "2025-01-16T12:00:00Z",
+        "source_model": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "vocabulary": {
+        "token_count": 30522,
+        "special_tokens": {
+          "pad_id": 0,
+          "unk_id": 100,
+          "cls_id": 101,
+          "sep_id": 102,
+          "mask_id": 103
+        },
+        "tokens": ["[PAD]", "[unused0]", "..."]
+      },
+      "tensor_index": [
+        {
+          "name": "embeddings.word_embeddings.weight",
+          "name_hash": 1234567890,
+          "dtype": "float32",
+          "dtype_code": 0,
+          "shape": [30522, 384],
+          "data_offset": 0,
+          "data_size": 46881792
+        },
+        {
+          "name": "embeddings.position_embeddings.weight",
+          "name_hash": 2345678901,
+          "dtype": "float32",
+          "dtype_code": 0,
+          "shape": [512, 384],
+          "data_offset": 46881792,
+          "data_size": 786432
+        }
+      ],
+      "footer": {
+        "data_checksum": 3456789012,
+        "file_checksum": 4567890123,
+        "magic_end": "DBME"
+      }
+    }
+  ],
+  "required_tensors": {
+    "description": "List of required tensor names for all-MiniLM-L6-v2",
+    "embedding_tensors": [
+      "embeddings.word_embeddings.weight",
+      "embeddings.position_embeddings.weight",
+      "embeddings.token_type_embeddings.weight",
+      "embeddings.LayerNorm.weight",
+      "embeddings.LayerNorm.bias"
+    ],
+    "encoder_layer_pattern": {
+      "description": "Pattern for encoder layers (replace {N} with 0-5)",
+      "tensors": [
+        "encoder.layer.{N}.attention.self.query.weight",
+        "encoder.layer.{N}.attention.self.query.bias",
+        "encoder.layer.{N}.attention.self.key.weight",
+        "encoder.layer.{N}.attention.self.key.bias",
+        "encoder.layer.{N}.attention.self.value.weight",
+        "encoder.layer.{N}.attention.self.value.bias",
+        "encoder.layer.{N}.attention.output.dense.weight",
+        "encoder.layer.{N}.attention.output.dense.bias",
+        "encoder.layer.{N}.attention.output.LayerNorm.weight",
+        "encoder.layer.{N}.attention.output.LayerNorm.bias",
+        "encoder.layer.{N}.intermediate.dense.weight",
+        "encoder.layer.{N}.intermediate.dense.bias",
+        "encoder.layer.{N}.output.dense.weight",
+        "encoder.layer.{N}.output.dense.bias",
+        "encoder.layer.{N}.output.LayerNorm.weight",
+        "encoder.layer.{N}.output.LayerNorm.bias"
+      ]
+    },
+    "total_tensor_count": 101
+  }
+}
