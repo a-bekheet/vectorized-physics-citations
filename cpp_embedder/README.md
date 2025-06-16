@@ -1,20 +1,23 @@
 # cpp_embedder
 
-A pure C++17 implementation of sentence embeddings using the all-MiniLM-L6-v2 architecture. Zero external dependencies - just standard C++ library.
+A pure C++17 **reference implementation** of sentence embeddings using the all-MiniLM-L6-v2 architecture. Zero external dependencies - just standard C++ library.
+
+> **Note**: This is an educational reference implementation demonstrating transformer inference from scratch in pure C++. It prioritizes code clarity and readability over performance. For production use, the Python `sentence-transformers` library is recommended.
 
 ## Overview
 
-cpp_embedder transforms text into 384-dimensional dense vectors suitable for semantic similarity tasks. It implements the full pipeline: tokenization, transformer encoding, mean pooling, and normalization.
+cpp_embedder transforms text into 384-dimensional dense vectors suitable for semantic similarity tasks. It implements the full pipeline from scratch: tokenization, transformer encoding, mean pooling, and normalization.
 
 **Key features:**
 
-- Pure C++17, no external dependencies
-- Compatible with all-MiniLM-L6-v2 model weights
+- Pure C++17, no external dependencies (no BLAS, no SIMD)
+- Implements all-MiniLM-L6-v2 architecture from scratch
 - WordPiece tokenizer implementation
 - 384-dimensional normalized embeddings
 - Command-line interface
 - Python bindings (via ctypes)
 - Cross-platform (Linux, macOS, Windows)
+- Educational: well-commented, readable code
 
 ## Quick Start
 
