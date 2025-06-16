@@ -139,6 +139,18 @@ CPP_EMBEDDER_API EmbedderHandle embedder_create_with_config(
 );
 
 /**
+ * Create a new embedder instance with weights and vocabulary paths.
+ *
+ * @param weights_path Path to the binary weight file (UTF-8).
+ * @param vocab_path Path to the vocabulary file (UTF-8, one token per line).
+ * @return Handle to the embedder, or NULL on failure. Check embedder_get_error().
+ */
+CPP_EMBEDDER_API EmbedderHandle embedder_create_with_vocab(
+    const char* weights_path,
+    const char* vocab_path
+);
+
+/**
  * Load weights from file into an existing embedder.
  *
  * @param handle Embedder handle.

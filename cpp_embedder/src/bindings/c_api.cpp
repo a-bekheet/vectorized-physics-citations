@@ -139,6 +139,49 @@ CPP_EMBEDDER_API EmbedderHandle embedder_create_with_config(
     }
 }
 
+CPP_EMBEDDER_API EmbedderHandle embedder_create_with_vocab(
+    const char* weights_path,
+    const char* vocab_path
+) {
+    clear_error();
+
+    try {
+        auto wrapper = new EmbedderWrapper();
+
+        wrapper->config.max_seq_length = 256;
+        wrapper->config.normalize_embeddings = true;
+        wrapper->should_normalize = true;
+
+        if (weights_path && weights_path[0] != '\0') {
+            wrapper->config.weights_path = weights_path;
+        }
+
+        if (vocab_path && vocab_path[0] != '\0') {
+            wrapper->config.vocab_path = vocab_path;
+        }
+
+        try {
+            wrapper->embedder = std::make_unique<cpp_embedder::model::Embedder>(
+                wrapper->config
+            );
+        } catch (const std::exception& e) {
+            set_error(CPP_EMBEDDER_ERROR_FILE_NOT_FOUND,
+                      "Failed to load model: " + std::string(e.what()));
+            delete wrapper;
+            return nullptr;
+        }
+
+        return static_cast<EmbedderHandle>(wrapper);
+
+    } catch (const std::bad_alloc&) {
+        set_error(CPP_EMBEDDER_ERROR_ALLOCATION_FAILED, "Memory allocation failed");
+        return nullptr;
+    } catch (const std::exception& e) {
+        set_error(CPP_EMBEDDER_ERROR_UNKNOWN, e.what());
+        return nullptr;
+    }
+}
+
 CPP_EMBEDDER_API CppEmbedderError embedder_load(EmbedderHandle handle, const char* weights_path) {
     clear_error();
 
