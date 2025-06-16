@@ -202,6 +202,32 @@ def validate_tensors(state_dict: Dict[str, np.ndarray]) -> bool:
     return True
 
 
+def should_transpose(name: str) -> bool:
+    """
+    Determine if a weight tensor should be transposed.
+
+    PyTorch Linear stores weights as (out_features, in_features), but our
+    C++ code does output = input @ weight, so we need (in_features, out_features).
+
+    We transpose all .weight tensors EXCEPT:
+    - Embedding tables (word_embeddings, position_embeddings, token_type_embeddings)
+    - LayerNorm parameters
+    """
+    if ".weight" not in name:
+        return False
+
+    # Don't transpose embedding tables
+    if "embeddings." in name and "LayerNorm" not in name:
+        return False
+
+    # Don't transpose LayerNorm parameters
+    if "LayerNorm" in name:
+        return False
+
+    # Transpose all other weight matrices (attention projections, FFN)
+    return True
+
+
 def write_binary(
     output_path: str,
     state_dict: Dict[str, np.ndarray],
@@ -216,7 +242,15 @@ def write_binary(
         vocab: List of vocabulary tokens
     """
     required_names = get_required_tensor_names()
-    tensors_to_write = [(name, state_dict[name]) for name in required_names]
+
+    # Prepare tensors, transposing weight matrices as needed
+    tensors_to_write = []
+    for name in required_names:
+        tensor = state_dict[name]
+        if should_transpose(name) and tensor.ndim == 2:
+            tensor = tensor.T.copy()
+            # print(f"  Transposed {name}: {state_dict[name].shape} -> {tensor.shape}")
+        tensors_to_write.append((name, tensor))
 
     total_tensor_bytes = 0
     for name, tensor in tensors_to_write:
