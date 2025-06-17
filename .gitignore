@@ -22,3 +22,9 @@ venv/
 # Project specific
 *.index
 .claude/
+
+# C++ build artifacts
+cpp_embedder/build/
+
+# Model weights (large files)
+data/models/*.bin
