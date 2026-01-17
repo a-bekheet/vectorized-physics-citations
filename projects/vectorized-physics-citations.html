@@ -97,11 +97,13 @@
 
       <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
         <span class="tag">Python</span>
+        <span class="tag">C++17</span>
         <span class="tag">PyTorch</span>
         <span class="tag">Sentence-BERT</span>
         <span class="tag">FAISS</span>
         <span class="tag">UMAP</span>
         <span class="tag">ArXiv API</span>
+        <span class="tag">CMake</span>
         <span class="tag">Semantic Search</span>
       </div>
 
@@ -169,6 +171,62 @@ for idx, score in zip(indices, scores):
         vector. These vectors are indexed using FAISS's IndexFlatIP for exact inner-product (cosine) similarity
         search, enabling query times under 1ms even for 10,000+ documents.
       </p>
+    </div>
+
+    <!-- C++ Reference Implementation -->
+    <div class="card-background" style="padding: 2rem; margin-bottom: 2rem;">
+      <h2>C++ Reference Implementation</h2>
+      <p style="margin-bottom: 1.5rem;">
+        As an educational exercise, I also implemented a pure C++17 version of the sentence embedder from scratch,
+        without any external dependencies beyond the standard library. This demonstrates how transformer-based
+        neural networks work at the lowest level—implementing everything from WordPiece tokenization to multi-head
+        self-attention.
+      </p>
+
+      <h3>Implementation Highlights</h3>
+      <ul style="margin-left: 1.5rem; list-style-type: disc; margin-bottom: 1.5rem;">
+        <li style="margin-bottom: 0.5rem;"><strong>Zero dependencies</strong> — Pure C++17 with only the standard library (no BLAS, no SIMD)</li>
+        <li style="margin-bottom: 0.5rem;"><strong>Complete transformer stack</strong> — Tensor operations, layer normalization, GELU activation, multi-head attention</li>
+        <li style="margin-bottom: 0.5rem;"><strong>WordPiece tokenizer</strong> — Full implementation matching the HuggingFace tokenizer behavior</li>
+        <li style="margin-bottom: 0.5rem;"><strong>Python bindings</strong> — ctypes-based interface for integration with the main Python pipeline</li>
+        <li style="margin-bottom: 0.5rem;"><strong>CLI tool</strong> — Standalone command-line interface for embedding text</li>
+      </ul>
+
+      <!-- C++ Code Snippet -->
+      <div class="card-background" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+        <pre style="white-space: pre-wrap; font-size: 0.9rem; overflow-x: auto;"><code>// Pure C++ embedding generation
+#include "model/embedder.hpp"
+
+cpp_embedder::model::EmbedderConfig config;
+config.weights_path = "model.weights";
+Embedder embedder(config);
+
+// Generate 384-dim normalized embedding
+auto embedding = embedder.embed("tokamak plasma instabilities");
+float similarity = cosine_similarity(embedding, other_embedding);</code></pre>
+      </div>
+
+      <p style="margin-bottom: 1.5rem;">
+        This implementation prioritizes code clarity and educational value over performance. It serves as a
+        reference for understanding how sentence transformers work internally—every matrix multiplication,
+        every attention head computation is visible in readable C++ code. The project includes comprehensive
+        documentation covering the architecture, build process, and usage patterns.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+        <div class="card-background" style="padding: 1.5rem;">
+          <div style="font-size: 1.5rem; font-weight: bold;">6</div>
+          <div style="color: var(--color-accent);">Transformer Layers</div>
+        </div>
+        <div class="card-background" style="padding: 1.5rem;">
+          <div style="font-size: 1.5rem; font-weight: bold;">12</div>
+          <div style="color: var(--color-accent);">Attention Heads</div>
+        </div>
+        <div class="card-background" style="padding: 1.5rem;">
+          <div style="font-size: 1.5rem; font-weight: bold;">30,522</div>
+          <div style="color: var(--color-accent);">Vocabulary Size</div>
+        </div>
+      </div>
     </div>
 
     <!-- Image Gallery -->
