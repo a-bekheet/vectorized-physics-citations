@@ -21,7 +21,11 @@ venv/
 
 # Project specific
 *.index
-.claude/
+
+# HTML files
+*.html
+results/plots/
+projects/*.html
 
 # C++ build artifacts
 cpp_embedder/build/
