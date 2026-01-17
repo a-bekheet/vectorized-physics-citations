@@ -213,7 +213,7 @@ float similarity = cosine_similarity(embedding, other_embedding);</code></pre>
         documentation covering the architecture, build process, and usage patterns.
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
         <div class="card-background" style="padding: 1.5rem;">
           <div style="font-size: 1.5rem; font-weight: bold;">6</div>
           <div style="color: var(--color-accent);">Transformer Layers</div>
@@ -227,6 +227,68 @@ float similarity = cosine_similarity(embedding, other_embedding);</code></pre>
           <div style="color: var(--color-accent);">Vocabulary Size</div>
         </div>
       </div>
+
+      <h3>Architecture & Components</h3>
+      <p style="margin-bottom: 1rem;">
+        The C++ implementation mirrors the all-MiniLM-L6-v2 architecture with modular components:
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+        <div>
+          <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Math Module</h4>
+          <p style="font-size: 0.9rem; color: var(--color-muted);">
+            Custom Tensor class with shape-aware operations, matrix multiplication, softmax, GELU activation,
+            and layer normalization—all implemented from first principles.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Tokenizer</h4>
+          <p style="font-size: 0.9rem; color: var(--color-muted);">
+            WordPiece tokenization with vocabulary lookup, unknown token handling, and special token insertion
+            ([CLS], [SEP], [PAD]).
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Transformer Layers</h4>
+          <p style="font-size: 0.9rem; color: var(--color-muted);">
+            Multi-head self-attention, feed-forward networks, residual connections, and layer normalization
+            forming the encoder stack.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Weight Loading</h4>
+          <p style="font-size: 0.9rem; color: var(--color-muted);">
+            Binary format reader with a Python conversion script that transforms PyTorch checkpoints into
+            an optimized layout for C++ consumption.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project Structure -->
+      <div class="card-background" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1rem; margin-bottom: 0.75rem;">Project Structure</h4>
+        <pre style="white-space: pre-wrap; font-size: 0.85rem; overflow-x: auto; margin: 0;"><code>cpp_embedder/
+├── include/           # Public headers
+│   ├── math/         # Tensor operations (ops.hpp, tensor.hpp)
+│   ├── tokenizer/    # WordPiece tokenizer
+│   ├── model/        # Transformer layers & embedder
+│   └── bindings/     # C API for FFI
+├── src/              # Implementation files
+├── python/           # Python package with ctypes bindings
+├── tools/            # Weight conversion scripts
+└── docs/             # Architecture & usage documentation</code></pre>
+      </div>
+
+      <h3>Data Flow</h3>
+      <p style="margin-bottom: 1rem;">
+        The embedding pipeline follows the standard transformer encoder pattern:
+      </p>
+      <ol style="margin-left: 1.5rem; list-style-type: decimal; margin-bottom: 1.5rem;">
+        <li style="margin-bottom: 0.5rem;"><strong>Tokenization</strong> — Input text is split into WordPiece tokens and mapped to vocabulary IDs</li>
+        <li style="margin-bottom: 0.5rem;"><strong>Embedding Lookup</strong> — Token, position, and segment embeddings are summed</li>
+        <li style="margin-bottom: 0.5rem;"><strong>Encoder Stack</strong> — 6 transformer layers process the sequence with self-attention</li>
+        <li style="margin-bottom: 0.5rem;"><strong>Mean Pooling</strong> — Token representations are averaged (excluding padding)</li>
+        <li style="margin-bottom: 0.5rem;"><strong>Normalization</strong> — Final L2 normalization produces unit-length vectors</li>
+      </ol>
     </div>
 
     <!-- Image Gallery -->
